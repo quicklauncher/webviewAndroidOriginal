@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.news.adilifeshop">
+    package="com.dun.dungngo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.Camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -11,20 +13,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.news.adilifeshop.splash">
-
+        <activity android:name=".startscaner"></activity>
+        <activity android:name=".scanner" />
+        <activity android:name=".splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.news.adilifeshop.MainActivity"
-            android:theme="@style/AppFullScreenTheme">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppFullScreenTheme" />
 
-        </activity>
         <service
-            android:name="com.news.adilifeshop.MyMessagingService"
+            android:name=".MyMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

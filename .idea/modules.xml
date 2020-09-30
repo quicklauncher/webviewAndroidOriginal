@@ -4,8 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WebViewMaster.iml" filepath="$PROJECT_DIR$/WebViewMaster.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/michelAndroidWebApp.iml" filepath="$PROJECT_DIR$/michelAndroidWebApp.iml" group="michelAndroidWebApp" />
-      <module fileurl="file://$PROJECT_DIR$/app/michelAndroidWebApp-app.iml" filepath="$PROJECT_DIR$/app/michelAndroidWebApp-app.iml" group="michelAndroidWebApp/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dungngoANDROID.iml" filepath="$PROJECT_DIR$/.idea/modules/dungngoANDROID.iml" group="dungngoANDROID" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/dungngoANDROID-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/dungngoANDROID-app.iml" group="dungngoANDROID/app" />
     </modules>
   </component>
 </project>

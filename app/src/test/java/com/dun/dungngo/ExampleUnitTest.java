@@ -1,4 +1,4 @@
-package com.news.adilifeshop;
+package com.dun.dungngo;
 
 import org.junit.Test;
 

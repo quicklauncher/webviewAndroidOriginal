@@ -1,4 +1,4 @@
-package com.news.adilifeshop;
+package com.dun.dungngo;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;

@@ -1,4 +1,4 @@
-package com.news.adilifeshop;
+package com.dun.dungngo;
 
 import android.annotation.TargetApi;
 import android.app.NotificationChannel;
@@ -11,35 +11,43 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.View;
 import android.webkit.DownloadListener;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
-    @TargetApi(Build.VERSION_CODES.O)
+
 
 
     WebView superWebView;
-
+    SwipeRefreshLayout websitePullToRefresh;
+    @TargetApi(Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(MainActivity.this,scanner.class);
+                startActivity(i);
+            }
+        });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
 
             NotificationChannel channel= new NotificationChannel("MyNotifications","MyNotifications", NotificationManager.IMPORTANCE_DEFAULT);
@@ -65,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        websitePullToRefresh = (SwipeRefreshLayout) findViewById(R.id.websitePullToRefresh);
+
 
 
 
@@ -73,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        superWebView.loadUrl("https://adlifeshop.com");
+
+
+        superWebView.loadUrl("https://getcare.vn/en/");
         superWebView.getSettings().setJavaScriptEnabled(true);
         superWebView.setWebViewClient(new WebViewClient() {
 
@@ -87,7 +99,48 @@ public class MainActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
             }
+
+
+            public void onReceivedError(WebView webView, int errorCode, String description, String failingUrl) {
+                try {
+                    superWebView.stopLoading();
+                } catch (Exception e) {
+                }
+
+                if (superWebView.canGoBack()) {
+                    webView.goBack();
+                }
+
+                superWebView.loadUrl("about:blank");
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                alertDialog.setTitle("Error");
+                alertDialog.setMessage("Check your internet connection and try again.");
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Try Again", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                        startActivity(getIntent());
+                    }
+                });
+
+                alertDialog.show();
+                super.onReceivedError(webView, errorCode, description, failingUrl);
+            }
         });
+
+        websitePullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                superWebView.loadUrl("https://getcare.vn/en/");
+                websitePullToRefresh.setRefreshing(false);
+            }
+        });
+
+
+
+
+
+
 
 
 
@@ -103,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 
 
 
